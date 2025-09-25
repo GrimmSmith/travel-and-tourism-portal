@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Your Trip | Travel & Tourism Portal</title>
+  <style>
+    body { font-family: Arial; background: #f0f0f0; padding: 50px; }
+    .form-box { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+    input, select { width: 100%; padding: 10px; margin: 10px 0; }
+    button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Book Your Destination</h2>
+    <form id="bookingForm">
+      <input type="number" name="user_id" placeholder="User ID" required />
+      <input type="number" name="destination_id" placeholder="Destination ID" required />
+      <input type="date" name="travel_date" required />
+      <input type="number" name="number_of_people" placeholder="Number of People" required />
+      <button type="submit">Book Now</button>
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      const response = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      document.getElementById('message').textContent = result.id 
+        ? 'Booking successful!' 
+        : 'Booking failed. Please check your input.';
+    });
+  </script>
+</body>
+</html>

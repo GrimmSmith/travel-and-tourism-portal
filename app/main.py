@@ -33,3 +33,8 @@ async def dashboard(request: Request):
 @app.get("/destinations", response_class=HTMLResponse)
 async def destination_page(request: Request):
     return templates.TemplateResponse("destination.html", {"request": request})
+
+# Serve booking page
+@app.get("/booking", response_class=HTMLResponse)
+async def booking_page(request: Request):
+    return templates.TemplateResponse("booking.html", {"request": request})
