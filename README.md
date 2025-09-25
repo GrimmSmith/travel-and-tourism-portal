@@ -50,6 +50,8 @@ pip install -r requirements.txt
 # Run the FastAPI app
 uvicorn app.main:app --reload
 
+
+
 📌 Status
 ✅ Auth router implemented
 🔧 Destination and booking routers in progress
