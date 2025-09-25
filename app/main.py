@@ -25,3 +25,8 @@ async def login_page(request: Request):
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
     return templates.TemplateResponse("dashboard.html", {"request": request})
+
+# Serve destination page
+@app.get("/destinations", response_class=HTMLResponse)
+async def destination_page(request: Request):
+    return templates.TemplateResponse("destination.html", {"request": request})
