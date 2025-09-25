@@ -1,4 +1,5 @@
-#🧳 Travel and Tourism Portal (FastAPI)
+🧳** Travel and Tourism Portal (FastAPI)
+**
 ✨ Overview
 A backend-driven travel and tourism portal built with FastAPI, designed to handle user authentication, destination listings, and booking operations. This project demonstrates modular API design, secure authentication, and clean architecture—perfect for showcasing backend development skills.
 
@@ -48,4 +49,15 @@ pip install -r requirements.txt
 
 # Run the FastAPI app
 uvicorn app.main:app --reload
+
+📌 Status
+✅ Auth router implemented
+🔧 Destination and booking routers in progress
+📄 Documentation and testing planned for final phase
+
+🧠 What This Project Demonstrates
+- Backend API design using FastAPI
+- Secure user authentication
+- Clean, modular code structure
+- Professional documentation and GitHub workflow
 
