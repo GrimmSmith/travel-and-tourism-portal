@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from app.api import auth, destinations  # Import your routers
+from app.api import auth, destinations, bookings  # Import your routers
 
 app = FastAPI(title="Travel Portal Backend")
 
@@ -12,6 +12,7 @@ templates = Jinja2Templates(directory="app/templates")
 # Include routers
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(destinations.router, prefix="/api", tags=["destinations"])
+app.include_router(bookings.router, prefix="/api", tags=["bookings"])
 
 # Health check endpoint
 @app.get("/health")
