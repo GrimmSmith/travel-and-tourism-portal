@@ -6,7 +6,7 @@ async function loadDestinations() {
   container.innerHTML = "<p>Loading destinations...</p>";
 
   try {
-    const API_BASE = "http://127.0.0.1:8000/api";
+    const res = await fetch(`${API_BASE}/destinations`);
     if (!res.ok) throw new Error("Failed to fetch destinations");
 
     const data = await res.json();
@@ -37,10 +37,20 @@ document.getElementById("bookingForm").addEventListener("submit", async (e) => {
     return;
   }
 
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You must be logged in to book a trip.");
+    window.location.href = "auth.html";
+    return;
+  }
+
   try {
     const res = await fetch(`${API_BASE}/bookings`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
       body: JSON.stringify(payload)
     });
 
