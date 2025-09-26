@@ -2,11 +2,16 @@ const API_BASE = "http://127.0.0.1:8000";
 
 // Load destinations from backend
 async function loadDestinations() {
+  const container = document.getElementById("destinations");
+  container.innerHTML = "<p>Loading destinations...</p>";
+
   try {
     const res = await fetch(`${API_BASE}/destinations`);
+    if (!res.ok) throw new Error("Failed to fetch destinations");
+
     const data = await res.json();
-    const container = document.getElementById("destinations");
     container.innerHTML = "";
+
     data.forEach(dest => {
       const div = document.createElement("div");
       div.className = "destination";
@@ -15,14 +20,22 @@ async function loadDestinations() {
     });
   } catch (error) {
     console.error("Error loading destinations:", error);
+    container.innerHTML = "<p>Unable to load destinations. Please try again later.</p>";
   }
 }
 
 // Handle booking form submission
 document.getElementById("bookingForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const formData = new FormData(e.target);
   const payload = Object.fromEntries(formData.entries());
+
+  // Basic validation
+  if (!payload.user_id || !payload.destination_id || !payload.date_from || !payload.date_to || !payload.guests) {
+    alert("Please fill in all fields before submitting.");
+    return;
+  }
 
   try {
     const res = await fetch(`${API_BASE}/bookings`, {
@@ -31,14 +44,14 @@ document.getElementById("bookingForm").addEventListener("submit", async (e) => {
       body: JSON.stringify(payload)
     });
 
+    const result = await res.json();
+
     if (!res.ok) {
-      const errorData = await res.json();
-      alert("Booking failed: " + JSON.stringify(errorData));
+      alert("Booking failed: " + (result.detail || JSON.stringify(result)));
       return;
     }
 
-    const result = await res.json();
-    alert("Booking confirmed: " + JSON.stringify(result));
+    alert("✅ Booking confirmed!\nID: " + result.id + "\nStatus: " + result.status);
     e.target.reset();
   } catch (error) {
     console.error("Error submitting booking:", error);
@@ -46,5 +59,5 @@ document.getElementById("bookingForm").addEventListener("submit", async (e) => {
   }
 });
 
-// Load destinations on page load
+// Initialize page
 loadDestinations();
