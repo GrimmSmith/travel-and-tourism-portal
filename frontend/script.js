@@ -6,7 +6,7 @@ async function loadDestinations() {
   container.innerHTML = "<p>Loading destinations...</p>";
 
   try {
-    const res = await fetch(`${API_BASE}/destinations`);
+    const API_BASE = "http://127.0.0.1:8000/api";
     if (!res.ok) throw new Error("Failed to fetch destinations");
 
     const data = await res.json();
