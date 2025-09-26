@@ -1,5 +1,27 @@
 const API_BASE = "http://127.0.0.1:8000/api";
 
+// Redirect if not logged in
+const token = localStorage.getItem("token");
+if (!token) {
+  alert("Please log in to access this page.");
+  window.location.href = "auth.html";
+}
+
+// Optional: Show logged-in user's email (if stored)
+const userEmail = localStorage.getItem("user_email");
+if (userEmail) {
+  const header = document.querySelector("h1");
+  header.innerHTML += ` <span style="font-size: 0.8rem; color: #555;">(Logged in as ${userEmail})</span>`;
+}
+
+// Logout button
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user_email");
+  alert("You have been logged out.");
+  window.location.href = "auth.html";
+});
+
 // Load destinations from backend
 async function loadDestinations() {
   const container = document.getElementById("destinations");
@@ -34,13 +56,6 @@ document.getElementById("bookingForm").addEventListener("submit", async (e) => {
   // Basic validation
   if (!payload.user_id || !payload.destination_id || !payload.date_from || !payload.date_to || !payload.guests) {
     alert("Please fill in all fields before submitting.");
-    return;
-  }
-
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("You must be logged in to book a trip.");
-    window.location.href = "auth.html";
     return;
   }
 
