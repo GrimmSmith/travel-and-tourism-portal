@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Travel & Tourism Portal</title>
+  <link rel="stylesheet" href="/static/styles/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">Explore India</a>
+      <button id="navToggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+      <nav id="navMenu" class="nav-menu" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/destinations">Destinations</a>
+        <a href="/book">Book</a>
+        <a href="/dashboard">Dashboard</a>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" role="region" aria-label="Hero">
+      <div class="hero-overlay container">
+        <h1 class="hero-title">Explore India’s Wonders</h1>
+        <p class="hero-sub">From the Himalayas to the Himalaya to the beaches of Goa — discover your next adventure.</p>
+        <a class="cta" href="/book" id="ctaBook">Start Your Journey</a>
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2 class="section-title">Featured Destinations</h2>
+      <div id="destinations" class="dest-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="section container" id="bookingSection">
+      <h2>Book a Trip</h2>
+      <form id="bookingForm" class="booking-form" novalidate>
+        <div class="row">
+          <label for="user_name">Name</label>
+          <input id="user_name" name="user_name" type="text" readonly />
+        </div>
+
+        <div class="row">
+          <label for="user_email">Email</label>
+          <input id="user_email" name="user_email" type="email" readonly />
+        </div>
+
+        <div class="row">
+          <label for="destination_id">Destination</label>
+          <select id="destination_id" name="destination_id" required>
+            <option value="">Select destination</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="date_from">From</label>
+          <input id="date_from" name="date_from" type="date" required />
+        </div>
+
+        <div class="row">
+          <label for="date_to">To</label>
+          <input id="date_to" name="date_to" type="date" required />
+        </div>
+
+        <div class="row">
+          <label for="guests">Guests</label>
+          <input id="guests" name="guests" type="number" min="1" max="10" value="1" required />
+        </div>
+
+        <div class="row actions">
+          <button type="submit" class="btn-primary">Book</button>
+          <span id="formStatus" class="form-status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

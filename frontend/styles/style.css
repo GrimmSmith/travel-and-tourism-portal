@@ -1,0 +1,159 @@
+:root{
+  --accent: #ff9933;
+  --accent-dark: #e07a1a;
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --radius: 10px;
+  --max-width: 900px;
+}
+
+/* Reset and base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: Arial, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue";
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Page container */
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:1.25rem;
+}
+
+/* Header */
+.site-header{
+  background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+  position:sticky;
+  top:0;
+  z-index:50;
+  border-bottom:1px solid rgba(31,41,55,0.04);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0.75rem 0;
+}
+.brand{
+  font-weight:700;
+  color:var(--text);
+  text-decoration:none;
+  font-size:1rem;
+}
+.nav-toggle{display:none;background:none;border:0;font-size:20px;cursor:pointer}
+.nav-menu{display:flex;gap:12px;align-items:center}
+.nav-menu a{color:var(--text);text-decoration:none;padding:8px 10px;border-radius:8px}
+.logout-btn{
+  background:var(--panel);
+  border:1px solid rgba(31,41,55,0.06);
+  padding:6px 10px;border-radius:8px;
+  cursor:pointer;
+}
+
+/* Hero */
+.hero{
+  background-image:linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.12)), url('/static/hotel_img/india-hero.jpg');
+  background-size:cover;
+  background-position:center;
+  height:64vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-overlay{
+  max-width:900px;
+  color:#fff;
+  text-align:center;
+  padding:2.25rem;
+  border-radius:var(--radius);
+  backdrop-filter: blur(2px);
+}
+.hero-title{font-size:clamp(26px,4vw,44px);margin:0 0 0.5rem}
+.hero-sub{margin:0 0 1rem; color:rgba(255,255,255,0.95)}
+.cta{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  padding:0.7rem 1.05rem;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 8px 20px rgba(255,153,51,0.12);
+}
+
+/* Section titles */
+.section{padding:2rem 0}
+.section-title{margin:0 0 1rem;font-size:1.15rem}
+
+/* Destinations grid */
+.dest-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
+}
+.dest-card{
+  background:var(--panel);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(31,41,55,0.06);
+  display:flex;
+  flex-direction:column;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.dest-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(31,41,55,0.08)}
+.dest-card img{width:100%;height:150px;object-fit:cover;display:block}
+.card-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card-body h3{margin:0;font-size:1.05rem}
+.card-body p{margin:0;color:var(--muted);font-size:0.95rem}
+.card-actions{margin-top:auto;display:flex;gap:10px}
+.card-actions a{
+  display:inline-block;padding:8px 10px;border-radius:8px;text-decoration:none;
+  background:rgba(0,0,0,0.04);color:var(--text);font-weight:600;
+}
+
+/* Booking form */
+.booking-form{
+  background:var(--panel);
+  padding:1.25rem;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(31,41,55,0.06);
+  max-width:720px;
+}
+.row{display:flex;flex-direction:column;margin-bottom:12px}
+.row label{font-size:0.9rem;margin-bottom:6px;color:var(--muted)}
+.row input,.row select{padding:10px;border:1px solid rgba(31,41,55,0.06);border-radius:8px;font-size:1rem;background:transparent}
+.row input[readonly]{background:rgba(0,0,0,0.03)}
+.row input:focus,.row select:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(255,153,51,0.08)
+}
+.actions{display:flex;align-items:center;gap:12px}
+.btn-primary{background:var(--accent);color:#fff;padding:10px 16px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
+.form-status{font-size:0.95rem;color:var(--muted)}
+
+/* Utilities */
+.muted{color:var(--muted)}
+
+/* Responsive adjustments */
+@media(max-width:900px){
+  .hero{height:48vh}
+  .nav-toggle{display:block}
+  .nav-menu{display:none;position:absolute;right:1rem;top:62px;background:var(--panel);border-radius:10px;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+  .nav-menu.show{display:flex;flex-direction:column}
+  .container{padding:1rem}
+  .dest-card img{height:140px}
+}
+@media(max-width:520px){
+  .hero-overlay{padding:1.25rem}
+  .dest-card img{height:120px}
+  .card-body h3{font-size:0.98rem}
+  .booking-form{padding:1rem}
+}
