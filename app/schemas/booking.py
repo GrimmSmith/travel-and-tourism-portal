@@ -33,6 +33,19 @@ class BookingCreate(BaseModel):
             }
         }
 
+class BookingUpdate(BaseModel):
+    date_from: Optional[date] = None
+    date_to: Optional[date] = None
+    guests: Optional[int] = Field(None, ge=1)
+    status: Optional[BookingStatus] = None
+
+    @validator("date_to")
+    def check_date_range(cls, v, values):
+        start = values.get("date_from")
+        if start and v and v < start:
+            raise ValueError("date_to must be the same as or after date_from")
+        return v
+
 class DestinationOut(BaseModel):
     id: int
     name: str
