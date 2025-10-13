@@ -11,8 +11,9 @@ templates = Jinja2Templates(directory="app/templates")
 
 # Include routers
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
-app.include_router(destinations.router, prefix="/api", tags=["destinations"])
 app.include_router(bookings.router, prefix="/api", tags=["bookings"])
+app.include_router(destinations.router, prefix="/api/destinations", tags=["destinations"])
+
 
 # Health check endpoint
 @app.get("/health")
