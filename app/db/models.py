@@ -11,6 +11,7 @@ class User(Base):
     name = Column(String, nullable=False)
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
+    is_admin = Column(Boolean, default=False)
 
     # Reverse relationship to bookings
     bookings = relationship("Booking", back_populates="user", cascade="all, delete")
